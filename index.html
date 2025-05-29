@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque - Transferência de Máquinas</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-laptop"></i>
+            </div>
+            <h1>Controle de Estoque</h1>
+            <p>Sistema de Transferência de Máquinas</p>
+        </header>
+        
+        <main class="main-content">
+            <form id="transferForm" class="transfer-form">
+                <h2>Registrar Transferência</h2>
+                
+                <div class="form-group">
+                    <label for="supervisor">Supervisor*</label>
+                    <input type="text" id="supervisor" name="supervisor" placeholder="Nome do supervisor" required>
+                    <div class="error-message" id="supervisor-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="consultor">Consultor*</label>
+                    <input type="text" id="consultor" name="consultor" placeholder="Nome do consultor" required>
+                    <div class="error-message" id="consultor-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="data">Data da Transferência*</label>
+                    <input type="date" id="data" name="data" required>
+                    <div class="error-message" id="data-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantidade">Quantidade de Máquinas*</label>
+                    <input type="number" id="quantidade" name="quantidade" min="1" value="1" required>
+                    <div class="error-message" id="quantidade-error"></div>
+                </div>
+                
+                <div id="seriais-container" class="seriais-container">
+                    <!-- Seriais serão adicionados dinamicamente aqui -->
+                </div>
+                
+                <button type="button" id="adicionarBtn" class="adicionar-btn">
+                    <i class="fas fa-plus"></i> Adicionar Máquinas
+                </button>
+                
+                <div class="form-group">
+                    <label for="observacoes">Observações</label>
+                    <textarea id="observacoes" name="observacoes" placeholder="Informações adicionais"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Registrar Transferência
+                </button>
+            </form>
+            
+            <div id="successMessage" class="success-message hidden">
+                <i class="fas fa-check-circle"></i>
+                <h3>Transferência registrada com sucesso!</h3>
+                <p id="success-details"></p>
+                <button id="newTransferBtn" class="new-transfer-btn">Nova Transferência</button>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>Sistema desenvolvido para controle interno</p>
+            <p>Atualizado em: <span id="current-date"></span></p>
+        </footer>
+    </div>
+    
+    <script src="assets/script.js"></script>
+</body>
+</html>
