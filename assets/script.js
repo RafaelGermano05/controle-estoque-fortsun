@@ -105,8 +105,8 @@ async function submitForm(data) {
             body: JSON.stringify(data)
         });
         
-        // Como estamos usando no-cors, não podemos ler a resposta
-        // Mas assumimos que foi bem-sucedido se não houve erro de rede
+   
+        // assumimos que foi bem-sucedido se não houve erro de rede
         return { status: "success" };
     } catch (error) {
         console.error('Erro:', error);
