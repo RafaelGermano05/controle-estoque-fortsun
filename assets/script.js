@@ -130,7 +130,7 @@ form.addEventListener('submit', async (e) => {
         supervisor: document.getElementById('supervisor').value.trim(),
         consultor: document.getElementById('consultor').value.trim(),
         data: document.getElementById('data').value,
-        serials: serials,
+        serial: document.getElementById('serial').value.trim(),
         observacoes: document.getElementById('observacoes').value.trim()
     };
     
@@ -142,17 +142,16 @@ form.addEventListener('submit', async (e) => {
     
     try {
         await submitForm(formData);
-        
+
+        form.classList.add('hidden');
+        successMessage.classList.remove('hidden');
         // Mostrar detalhes do envio
         document.getElementById('success-details').innerHTML = `
             <strong>${formData.consultor}</strong> recebeu <strong>${serials.length}</strong> máquina(s):<br>
-            ${serials.join(', ')}
+            // ${serials.join(', ')}
         `;
         
-        // Esconder formulário e mostrar mensagem de sucesso
-        form.classList.add('hidden');
-        successMessage.classList.remove('hidden');
-        
+    
         // Resetar o formulário após envio bem-sucedido
         resetForm();
      } /*catch (error) {
