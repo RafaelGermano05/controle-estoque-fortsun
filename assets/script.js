@@ -183,3 +183,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('data').value = today;
 });
+ requiredFields.forEach(field => {
+        const input = document.getElementById(field.id);
+        const errorElement = document.getElementById(field.errorId);
+        
+        input.addEventListener('input', function() {
+            if (this.value.trim() === '') {
+                this.style.borderColor = 'var(--error)';
+                errorElement.textContent = 'Este campo é obrigatório';
+                errorElement.style.display = 'block';
+            } else {
+                this.style.borderColor = 'var(--border)';
+                errorElement.style.display = 'none';
+            }
+        });
+    });
