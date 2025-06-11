@@ -155,9 +155,9 @@ form.addEventListener('submit', async (e) => {
         
         // Resetar o formulário após envio bem-sucedido
         resetForm();
-    } catch (error) {
-        alert('Ocorreu um erro ao enviar os dados. Por favor, tente novamente.');
-    } finally {
+     } /*catch (error) {
+         alert('Ocorreu um erro ao enviar os dados. Por favor, tente novamente.');
+    }*/ finally {
         // Restaurar botão independente do resultado
         submitBtn.innerHTML = originalBtnText;
         submitBtn.disabled = false;
