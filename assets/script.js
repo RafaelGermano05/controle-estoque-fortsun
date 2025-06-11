@@ -142,17 +142,15 @@ form.addEventListener('submit', async (e) => {
     
     try {
         await submitForm(formData);
-
-        form.classList.add('hidden');
-        successMessage.classList.remove('hidden');
-        // Mostrar detalhes do envio
+        
         document.getElementById('success-details').innerHTML = `
             <strong>${formData.consultor}</strong> recebeu <strong>${serials.length}</strong> máquina(s):<br>
             // ${serials.join(', ')}
         `;
         
+        form.classList.add('hidden');
+        // successMessage.classList.remove('hidden');
     
-        // Resetar o formulário após envio bem-sucedido
         resetForm();
      } /*catch (error) {
          alert('Ocorreu um erro ao enviar os dados. Por favor, tente novamente.');
