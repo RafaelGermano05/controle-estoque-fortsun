@@ -149,7 +149,7 @@ form.addEventListener('submit', async (e) => {
         `;
         
         form.classList.add('hidden');
-        // successMessage.classList.remove('hidden');
+        successMessage.classList.remove('hidden');
     
         resetForm();
      } /*catch (error) {
