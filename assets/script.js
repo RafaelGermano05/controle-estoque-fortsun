@@ -1,5 +1,5 @@
 // Configurações do Google Apps Script
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbylZmA2Rqo4zyN8j_Z4Gcs0nMOhdbIYABNXX38131Kw4v1xIP1K-YPo_oCDJxpL1lZ0kw/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJUp4K2ILpObeKRdJvMWFe2bcXAtSglQoXQoKebtRgwGm5DVkJWytKKOrWgWKbC64xIw/exec';
 
 // Elementos do formulário
 const form = document.getElementById('transferForm');
