@@ -1,5 +1,5 @@
 // Configurações do Google Apps Script
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJUp4K2ILpObeKRdJvMWFe2bcXAtSglQoXQoKebtRgwGm5DVkJWytKKOrWgWKbC64xIw/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbylZmA2Rqo4zyN8j_Z4Gcs0nMOhdbIYABNXX38131Kw4v1xIP1K-YPo_oCDJxpL1lZ0kw/exec';
 
 // Elementos do formulário
 const form = document.getElementById('transferForm');
@@ -130,7 +130,7 @@ form.addEventListener('submit', async (e) => {
         supervisor: document.getElementById('supervisor').value.trim(),
         consultor: document.getElementById('consultor').value.trim(),
         data: document.getElementById('data').value,
-        serial: document.getElementById('serial').value.trim(),
+        serials: serials,
         observacoes: document.getElementById('observacoes').value.trim()
     };
     
@@ -143,14 +143,17 @@ form.addEventListener('submit', async (e) => {
     try {
         await submitForm(formData);
         
+        // Mostrar detalhes do envio
         document.getElementById('success-details').innerHTML = `
             <strong>${formData.consultor}</strong> recebeu <strong>${serials.length}</strong> máquina(s):<br>
-            // ${serials.join(', ')}
+            ${serials.join(', ')}
         `;
         
+        // Esconder formulário e mostrar mensagem de sucesso
         form.classList.add('hidden');
         successMessage.classList.remove('hidden');
-    
+        
+        // Resetar o formulário após envio bem-sucedido
         resetForm();
      } /*catch (error) {
          alert('Ocorreu um erro ao enviar os dados. Por favor, tente novamente.');
@@ -180,18 +183,3 @@ document.addEventListener('DOMContentLoaded', () => {
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('data').value = today;
 });
- requiredFields.forEach(field => {
-        const input = document.getElementById(field.id);
-        const errorElement = document.getElementById(field.errorId);
-        
-        input.addEventListener('input', function() {
-            if (this.value.trim() === '') {
-                this.style.borderColor = 'var(--error)';
-                errorElement.textContent = 'Este campo é obrigatório';
-                errorElement.style.display = 'block';
-            } else {
-                this.style.borderColor = 'var(--border)';
-                errorElement.style.display = 'none';
-            }
-        });
-    });
