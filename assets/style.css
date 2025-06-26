@@ -60,6 +60,10 @@ body {
     margin-bottom: 30px;
 }
 
+.transfer-form {
+    display: block;
+}
+
 .transfer-form h2 {
     color: var(--primary);
     margin-bottom: 20px;
@@ -171,10 +175,6 @@ body {
     background-color: #1a252f;
 }
 
-.hidden {
-    display: none;
-}
-
 .footer {
     text-align: center;
     padding: 20px 0;
@@ -187,21 +187,6 @@ body {
     margin-bottom: 5px;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
-    
-    .main-content {
-        padding: 20px;
-    }
-    
-    .header h1 {
-        font-size: 1.5rem;
-    }
-}
-
 .seriais-container {
     margin-bottom: 20px;
     border: 1px solid var(--border);
@@ -211,19 +196,17 @@ body {
 }
 
 .serial-group {
-    display: flex;
-    align-items: center;
     margin-bottom: 10px;
 }
 
 .serial-group label {
-    min-width: 100px;
-    margin-right: 10px;
+    display: block;
+    margin-bottom: 5px;
     font-weight: normal;
 }
 
 .serial-group input {
-    flex-grow: 1;
+    width: 100%;
     padding: 8px;
     border: 1px solid var(--border);
     border-radius: 4px;
@@ -250,4 +233,18 @@ body {
 
 .adicionar-btn i {
     font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .main-content {
+        padding: 20px;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem;
+    }
 }

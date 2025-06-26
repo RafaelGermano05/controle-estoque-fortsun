@@ -1,4 +1,3 @@
-// Configurações do Google Apps Script
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbylZmA2Rqo4zyN8j_Z4Gcs0nMOhdbIYABNXX38131Kw4v1xIP1K-YPo_oCDJxpL1lZ0kw/exec';
 
 // Elementos do formulário
@@ -8,7 +7,6 @@ const newTransferBtn = document.getElementById('newTransferBtn');
 const adicionarBtn = document.getElementById('adicionarBtn');
 const seriaisContainer = document.getElementById('seriais-container');
 
-// Campos obrigatórios
 const requiredFields = [
     { id: 'supervisor', errorId: 'supervisor-error' },
     { id: 'consultor', errorId: 'consultor-error' },
@@ -16,10 +14,6 @@ const requiredFields = [
     { id: 'quantidade', errorId: 'quantidade-error' }
 ];
 
-// Array para armazenar os seriais
-let serials = [];
-
-// Atualiza a data atual no footer
 function updateCurrentDate() {
     const now = new Date();
     const options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
@@ -27,7 +21,6 @@ function updateCurrentDate() {
     document.getElementById('current-date').textContent = formattedDate;
 }
 
-// Valida os campos do formulário
 function validateForm() {
     let isValid = true;
     
@@ -46,32 +39,22 @@ function validateForm() {
         }
     });
     
-    // valida se há pelo menos um serial adicionado
-    if (serials.length === 9999) {
-        alert('Por favor, adicione pelo menos uma máquina usando o botão "Adicionar Máquinas"');
-        return false;
-    }
-    
     return isValid;
 }
 
-// Limpa o formulário completamente
 function resetForm() {
     form.reset();
-    serials = [];
     seriaisContainer.innerHTML = '';
     requiredFields.forEach(field => {
         document.getElementById(field.id).style.borderColor = 'var(--border)';
         document.getElementById(field.errorId).style.display = 'none';
     });
     
-    // Configura a data atual como padrão
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('data').value = today;
     document.getElementById('quantidade').value = 1;
 }
 
-// Adiciona campos de serial dinamicamente
 function adicionarCamposSeriais() {
     const quantidade = parseInt(document.getElementById('quantidade').value);
     
@@ -95,7 +78,6 @@ function adicionarCamposSeriais() {
     }
 }
 
-// Envia os dados para o Google Sheets
 async function submitForm(data) {
     try {
         const response = await fetch(WEB_APP_URL, {
@@ -105,8 +87,6 @@ async function submitForm(data) {
             body: JSON.stringify(data)
         });
         
-   
-        // assumimos que foi bem-sucedido se não houve erro de rede
         return { status: "success" };
     } catch (error) {
         console.error('Erro:', error);
@@ -114,7 +94,6 @@ async function submitForm(data) {
     }
 }
 
-// Manipulador de envio do formulário
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -124,13 +103,18 @@ form.addEventListener('submit', async (e) => {
     
     // Coletar todos os seriais
     const serialInputs = document.querySelectorAll('.serial-input');
-    const serials = Array.from(serialInputs).map(input => input.value.trim());
+    const submittedSerials = Array.from(serialInputs).map(input => input.value.trim());
+    
+    if (submittedSerials.length === 0 || submittedSerials.some(serial => !serial)) {
+        alert('Por favor, preencha todos os números de série das máquinas');
+        return;
+    }
     
     const formData = {
         supervisor: document.getElementById('supervisor').value.trim(),
         consultor: document.getElementById('consultor').value.trim(),
         data: document.getElementById('data').value,
-        serials: serials,
+        serials: submittedSerials,
         observacoes: document.getElementById('observacoes').value.trim()
     };
     
@@ -143,17 +127,15 @@ form.addEventListener('submit', async (e) => {
     try {
         await submitForm(formData);
         
-        // Mostrar detalhes do envio
         document.getElementById('success-details').innerHTML = `
-            <strong>${formData.consultor}</strong> recebeu <strong>${serials.length}</strong> máquina(s):<br>
-            ${serials.join(', ')}
+            <strong>${formData.consultor}</strong> recebeu <strong>${submittedSerials.length}</strong> máquina(s):<br>
+            ${submittedSerials.join(', ')}
         `;
         
         // Esconder formulário e mostrar mensagem de sucesso
-        form.classList.add('hidden');
-        successMessage.classList.remove('hidden');
+        form.style.display = 'none';
+        successMessage.style.display = 'block';
         
-        // Resetar o formulário após envio bem-sucedido
         resetForm();
     } catch (error) {
         alert('Ocorreu um erro ao enviar os dados. Por favor, tente novamente.');
@@ -164,15 +146,13 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
-// Botão para adicionar máquinas
 adicionarBtn.addEventListener('click', () => {
     adicionarCamposSeriais();
 });
 
-// Botão para nova transferência
 newTransferBtn.addEventListener('click', () => {
-    successMessage.classList.add('hidden');
-    form.classList.remove('hidden');
+    successMessage.style.display = 'none';
+    form.style.display = 'block';
 });
 
 // Inicialização
