@@ -41,6 +41,12 @@ body {
     margin-bottom: 10px;
 }
 
+.header img {
+    margin-top: 10px;
+    height: 75px;
+    color: var(--primary);
+}
+
 .header h1 {
     font-size: 2rem;
     color: var(--primary);
